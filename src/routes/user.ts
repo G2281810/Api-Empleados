@@ -7,7 +7,7 @@ const router = Router();
 //Crearemos todas nuestras rutas para nuestro usuarios que solo pueden ser vistas por adminstradores//
 
 //Ruta para mostrar todos nuestros usuarios//
-router.get('/', [checkJwt], UserController.getAll);
+router.get('/', UserController.getAll);
 
 //Ruta para mostrar un solo usuario//
 router.get('/:idusuario', [checkJwt], UserController.getById);

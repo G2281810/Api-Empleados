@@ -13,10 +13,10 @@ router.get('/',[checkJwt],EmployeesController.getAll);
 //Ruta para mostrar un solo empleado//
 router.get('/:idempleado',[checkJwt],EmployeesController.getById);
 //Ruta para crear un nuevo empleado//
-router.post('/', [checkJwt], EmployeesController.newEmployee);
+router.post('/',[checkJwt], EmployeesController.newEmployee);
 //Ruta para editar un empleado//
 router.patch('/:idempleado',[checkJwt],EmployeesController.editEmployee);
 //ruta para eliminar un empleado//
-router.delete('/:idempleado', [checkJwt], EmployeesController.deleteEmployee);
+router.delete('/:idempleado',[checkJwt], EmployeesController.deleteEmployee);
 
 export default router;

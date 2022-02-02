@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { MinLength, IsNotEmpty, IsEmail, IsDate,MaxLength} from "class-validator";
 import * as bcrypt from 'bcryptjs';
+import { Skills } from "./skills";
 
 @Entity()
 @Unique(['idempleado'])
@@ -28,13 +29,13 @@ export class Employees{
     @Column()
     @IsNotEmpty()
     @MinLength(4)
-    @MaxLength(15)
+    @MaxLength(30)
     email:string;
 
     @Column()
     @IsNotEmpty()
     @MinLength(4)
-    @MaxLength(15)
+    @MaxLength(255)
     password:string;
 
     @Column()
@@ -47,7 +48,7 @@ export class Employees{
     @IsNotEmpty()
     @MinLength(4)
     @MaxLength(15)
-    fecha_n:Date;
+    fecha_n:string;
 
     @Column()
     @IsNotEmpty()
@@ -62,6 +63,10 @@ export class Employees{
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    //Creamos la relación con la tabla para la llave foranea//
+    @OneToMany(()=>Skills, (skills) => skills.employee,{ cascade:true })
+    skills: Skills[];
 
     hashPassword():void {
         const salt = bcrypt.genSaltSync(10);

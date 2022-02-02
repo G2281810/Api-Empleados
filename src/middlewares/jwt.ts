@@ -13,7 +13,7 @@ export const checkJwt =(req: Request, res:Response, next:NextFunction)=>{
         res.locals.jwtPayload = jwtPayload;
 
     }catch(e){
-        return res.status(401).json({message:'Ruta protegida favor inicia sesión'});
+        return res.status(400).json({message:'Ruta protegida favor inicia sesión'});
     }
 
     const {UserId, email} = jwtPayload;
