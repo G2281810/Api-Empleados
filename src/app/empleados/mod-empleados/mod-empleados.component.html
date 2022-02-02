@@ -1,0 +1,117 @@
+<div class="container mt-4">
+
+  <div class="card mb-3">
+      <div class="card-body">
+          <h2>Modificar Empleado</h2>
+          
+          <div *ngIf="successmsg" class="alert alert-dismissible alert-success">
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              <strong>{{successmsg}}</strong>
+          </div>
+          <form [formGroup]="empleadosForm">
+              <div class="form-group">
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Nombre empleado:</label>
+                          <input type="text" id="nombre" class="form-control"  formControlName="nombreempleado" placeholder="Ingresa tu nombre empleado(s)" required>
+                          <div>
+                            <span class="text-danger" *ngIf="nombreempleado && nombreempleado.invalid && nombreempleado.touched" >El nombre es requerido o error de captura</span>
+                          </div>
+                  </div>
+          
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Apellido Paterno:</label>
+                          <input type="text" class="form-control" formControlName="appaterno" placeholder="Ingresa tu apellido paterno">
+                          <div>
+                            <span class="text-danger" *ngIf="appaterno && appaterno.invalid && appaterno.touched" >El apellido es requerido o error de captura</span>
+                          </div>
+                  </div>
+          
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Apellido Materno:</label>
+                          <input type="text" class="form-control" formControlName="apmaterno" placeholder="Ingresa tu apellido materno">
+                          <div>
+                            <span class="text-danger" *ngIf="apmaterno && apmaterno.invalid && apmaterno.touched" >El apellido es requerido o error de captura</span>
+                          </div>
+                  </div>
+          
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Email:</label>
+                          <input type="email" class="form-control" formControlName="email" placeholder="Ingresa tu Correo electronico">
+                          <div>
+                            <span class="text-danger" *ngIf="email && email.invalid && email.touched" >El correo es requerido o error de captura</span>
+                          </div>
+                  </div>
+          
+                  <div class="form-group">
+                    <label class="form-label mt-4" for="inputValid">Password:</label>
+                        <input type="password" class="form-control" formControlName="password" placeholder="Ingresa tu Contraseña">
+                        <div>
+                          <span class="text-danger" *ngIf="password && password.invalid && password.touched" >El password es requerido o minimo 3 caracteres</span>
+                        </div>
+                  </div>
+          
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Puesto:</label>
+                          <input type="text" class="form-control" formControlName="puesto" placeholder="Ingresa tu puesto">
+                          <div>
+                            <span class="text-danger" *ngIf="puesto && puesto.invalid && puesto.touched" >El puesto es requerido o error de captura</span>
+                          </div>
+                  </div>
+          
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Fecha de nacimiento:</label>
+                          <input type="date" class="form-control" formControlName="fecha_n" placeholder="Ingresa tu fecha de nacimiento">
+                          <div>
+                            <span class="text-danger" *ngIf="fecha_n && fecha_n.invalid && fecha_n.touched" >La fecha es requerida o error de captura</span>
+                          </div>
+                  </div>
+          
+                  <div class="form-group">
+                      <label class="form-label mt-4" for="inputValid">Domicilio:</label>
+                          <input type="text" class="form-control" formControlName="domicilio" placeholder="Ingresa tu domicilio">
+                          <div>
+                            <span class="text-danger" *ngIf="domicilio && domicilio.invalid && domicilio.touched" >El domicilio es requerido o error de captura</span>
+                          </div>
+                  </div><br>
+                  <div *ngIf="haberror" class="alert alert-dismissible alert-primary">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>{{haberror}}</strong>
+                  </div><br>
+                    <p class="text-primary">Deseas modificar tus habilidades?.</p>
+                  <button class="btn btn-primary btn-lg-2" (click)="agHabilidades()" type="button">Modificar habilidades</button>
+                  <!--Agregar una o mas habilidades-->
+                  <div formArrayName="habilidades">
+                    
+                      <div *ngFor="let habForom of habilidades.controls; let i=index;">
+                        <div ></div>
+                       <div [formGroupName]="i">
+                        <div>
+                          <div class="form-group">
+                            <label class="form-label mt-4" for="inputValid">Habilidad:</label>
+                                <input type="text" class="form-control" formControlName="habilidades" placeholder="Ingresa tu habilidad">
+                                <div>
+                                  <span class="text-danger" *ngIf="habilidades && habilidades.invalid && habilidades.touched" >Las habilidades son requeridas o error de captura</span>
+                                </div>
+                          </div>    
+                          <div class="form-group">
+                            <label class="form-label mt-4" for="inputValid">Calificación:</label>
+                                <input type="text" class="form-control" formControlName="calificacion" placeholder="Ingresa tu Calificación">
+                                <div>
+                                  <span class="text-danger" *ngIf="habilidades && habilidades.invalid && habilidades.touched" >Las habilidades son requeridas o error de captura</span>
+                                </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      </div>
+                  </div>
+                  <br>
+                    <div class="boton">
+                        <button class="btn btn-success btn-lg-2" (click)="empleadosUpdate()">Modificar Empleado</button>
+                    </div><br><br><br>
+                </div>
+            
+            </form>
+        </div>
+    </div>
+</div>

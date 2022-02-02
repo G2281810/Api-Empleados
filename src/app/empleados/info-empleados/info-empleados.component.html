@@ -1,0 +1,81 @@
+<div class="container mt-4">
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2>Información del empleado</h2>
+    <form [formGroup]="empleadosForm">
+    
+        <div class="form-group">
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Nombre empleado:</label>
+                    <input type="text" class="form-control" formControlName="nombreempleado"  readonly>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Apellido Paterno:</label>
+                    <input type="text" class="form-control" formControlName="appaterno" readonly>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Apellido Materno:</label>
+                    <input type="text" class="form-control" formControlName="apmaterno"readonly>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Email:</label>
+                    <input type="email" class="form-control" formControlName="email" readonly>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Password:</label>
+                    <input type="email" class="form-control" formControlName="password" readonly>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Puesto:</label>
+                    <input type="text" class="form-control" formControlName="puesto" readonly>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Fecha de nacimiento:</label>
+                    <input type="text" class="form-control" formControlName="fecha_n" readonly>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Domicilio:</label>
+                <input type="text" class="form-control" formControlName="domicilio" readonly>
+            </div>
+            <br>
+            <div>
+                <label class="form-label mt-4" for="inputValid">Ubicación google maps</label>
+            </div><br>
+            <div class="form-group">
+                <label>Direccion</label>
+                <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Busca una dirección" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+              </div>
+            <!--Agregando google maps-->
+            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                (dragEnd)="markerDragEnd($event)">
+
+                </agm-marker>
+            </agm-map>
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Latitud de tu ubicación actual:</label>
+                <input type="text" class="form-control" value={{latitude}} readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label mt-4" for="inputValid">Longitud de tu ubicación actual:</label>
+                <input type="text" class="form-control" value={{longitude}} readonly>
+            </div><br>
+            <div class="boton">
+                <button class="btn btn-primary" (click)="regresar()">Regresar</button>
+            </div><br><br><br>
+            
+        </div>
+    
+    </form>
+        </div>
+      
+    </div>
+</div>

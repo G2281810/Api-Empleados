@@ -1,1 +1,49 @@
-<p>lista-empleados works!</p>
+<div class="container mt-3">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2>Lista de empleados registrados.</h2><br>
+
+            <a routerLink='nuevo-empleado' class="btn btn-success">Crear empleado</a><br><br>
+
+            <div *ngIf ='message' class="alert alert-dismissible alert-primary">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>{{message}}</strong>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"># Empleado</th>
+                        <th scope="col">Nombre Empleado</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Puesto</th>
+                        <th scope="col">Domicilio</th>
+                        <th class="acciones" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-primary" *ngFor  = 'let em of data | paginate: { itemsPerPage: 5, currentPage: page }'>
+                        <th class="id" scope="row">{{em.idempleado}}</th>
+                        <td>{{em.nombreempleado}} {{em.appaterno}} {{em.apmaterno}}</td>
+                        <td>{{em.email}}</td>
+                        <td>{{em.puesto}}</td>
+                        <td>{{em.domicilio}}</td>
+                        <td><button class="btn btn-sm btn-danger"(click)="deleteID(em.idempleado)">Eliminar</button> &nbsp;
+                            <a [routerLink]="['/info-empleados',em.idempleado]" class="btn btn-sm btn-info">Ver info</a>
+                            &nbsp;
+                            <a [routerLink]="['/modificar-empleado',em.idempleado]" class="btn btn-sm btn-primary">Modificar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table><br>
+            <div *ngIf='let pag of pagination'>
+
+            </div>
+            <pagination-controls (pageChange)="page = $event"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            ></pagination-controls>
+            
+        </div>
+    </div>
+</div>

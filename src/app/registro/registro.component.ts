@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
     apmaterno: ['',[Validators.required, Validators.pattern(this.validacion),Validators.minLength(3)]],
     email: ['',[Validators.required,Validators.email,Validators.minLength(3)]],
     password: ['',[Validators.required,Validators.minLength(3),]],
-    role: ['',[Validators.required],Validators.minLength(3)]
+    role: ['',[Validators.required,Validators.minLength(3)]],
   });
 
   get nombreusuario(){ return this.regForm.get('nombreusuario');}

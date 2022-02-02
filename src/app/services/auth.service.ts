@@ -6,17 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-
+  
   private uriLogin = 'http://localhost:3000/auth'
   private uriUsuario = 'http://localhost:3000/users/'
+  logout: any;
+  isLogged: any;
+  
   constructor(private http: HttpClient, private jwtHelper:JwtHelperService) { }
   //Login
-  signIn(user:any,data:any):Observable<any>{
+  signIn(user:any,data:any){
     return this.http.post(`${this.uriLogin}/login`,user,data);
 
   }
   //Registro nuevo//
-  regUsuario(data:any):Observable<any>
+  regUsuario(data:any)
   {
     console.log(data, 'createapi=>');
     return this.http.post(`${this.uriUsuario}`,data);
