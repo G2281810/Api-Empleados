@@ -10,8 +10,9 @@ export class EmployeesController{
     static getAll = async(req: Request, res:Response) => {
         const empRepository = getRepository(Employees);
         const employees = await empRepository.find();
-
+        
             if(employees.length > 0){
+                console.log(employees.length);
                 res.status(200);
                 res.send(employees);
 
@@ -57,21 +58,17 @@ export class EmployeesController{
         const errors = await validate(employee, validationOp);
 
         if (errors.length > 0) { 
-            res.send({message:"Verifica tu información"});
+            res.send({message:"Verifica tu información",errors});
         }else{
-            const empRepository = getRepository(Employees);
-            const skillRepository = getRepository(Skills)
-            employee.hashPassword();
-            await empRepository.save(employee);
-            console.log('dataasd',req.body);
-            console.log('employee',employee);
 
+            const empRepository = getRepository(Employees);
+            const skillRepository = getRepository(Skills);
+            employee.hashPassword();
+
+            await empRepository.save(employee);
             const skills = req.body.habilidades;
-            console.log(skills.habilidades);
             
-            console.log(skills);
             skills.forEach(element => {
-                console.log(element);
                 const skill = new Skills();
                 skill.habilidades = element.habilidades;
                 skill.calificacion=element.calificacion;
@@ -107,25 +104,15 @@ export class EmployeesController{
 
             skill =  await skillRepository.findOne({where:{employee:idempleado}})
             let skillupdate = req.body.habilidades;
-            console.log('viejas',skill)
-            console.log('nuevas',skillupdate);
-           
-            skillupdate.forEach(async element => {
-                console.log('antes',skill.habilidades);
-                console.log('antes',skill.calificacion);
-                console.log('cambia por',element.habilidades);
-                console.log('cambia por',element.calificacion);
 
+            skillupdate.forEach(async element => {
                 skill.habilidades = element.habilidades;
                 skill.calificacion = element.calificacion;
-                console.log('despues',skill.habilidades);
-                console.log('despues',skill.calificacion);
                 await skillRepository.save(skill);
             });
             
-
         }catch(e){
-            return res.status(404).json({message:'Empleados no encontrados'});
+            return res.send({message:"Verifica tu información"});
         }
         //Validación//
         let validatinOp = {validationError:{target: false, value: false}};
@@ -136,7 +123,6 @@ export class EmployeesController{
         }else{
             employee.hashPassword();
             await empRepository.save(employee);
-           
             
         res.status(200).send({message:'Empleado Actualizado'});
         }
